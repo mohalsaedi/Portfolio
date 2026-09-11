@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محمد عبدالرحمن الصاعدي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#40b2ef',
+                        'primary-dark': '#2a8fc7',
+                        secondary: '#87ceeb',
+                        'bg-dark': '#0a1929',
+                        'bg-medium': '#112240',
+                        'bg-light': '#1a2f4a',
+                        'text-primary': '#ffffff',
+                        'text-secondary': '#a8b2d1',
+                        accent: '#40b2ef',
+                    },
+                    fontFamily: {
+                        'cairo': ['Cairo', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'wave': 'wave 15s ease-in-out infinite',
+                        'float-gentle': 'float-gentle 3s ease-in-out infinite',
+                        'fadeInUp': 'fadeInUp 1s ease-out',
+                        'glow': 'glow 2s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s linear infinite',
+                    },
+                    keyframes: {
+                        wave: {
+                            '0%, 100%': { transform: 'translateX(-100%)' },
+                            '50%': { transform: 'translateX(100%)' },
+                        },
+                        'float-gentle': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeInUp: {
+                            from: { opacity: '0', transform: 'translateY(30px)' },
+                            to: { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        glow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(64,178,239,0.3), 0 0 40px rgba(64,178,239,0.1)' },
+                            '50%': { boxShadow: '0 0 30px rgba(64,178,239,0.5), 0 0 60px rgba(64,178,239,0.2)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% center' },
+                            '100%': { backgroundPosition: '200% center' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* ─── Base ─────────────────────────────────────────────── */
+        body[dir="ltr"] { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #40b2ef 0%, #64ffda 50%, #40b2ef 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
+
+        /* ─── Cards ─────────────────────────────────────────────── */
+        .enhanced-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .enhanced-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(64,178,239,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+        .enhanced-card:hover::before { opacity: 1; }
+
+        /* ─── Animations ─────────────────────────────────────────── */
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(64,178,239,0.7); }
+            50% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(64,178,239,0); }
+        }
+
+        /* ─── Hero layout ────────────────────────────────────────── */
+        [dir="ltr"] .hero-content { grid-template-columns: 320px 1fr; }
+        [dir="ltr"] .hero-text    { text-align: left; }
+        [dir="ltr"] .cta-buttons  { justify-content: flex-start; }
+        [dir="ltr"] .hero-social  { justify-content: flex-start; }
+        [dir="ltr"] .hero-image   { order: -1; }
+
+        [dir="rtl"] .hero-content { grid-template-columns: 1fr 320px; }
+        [dir="rtl"] .hero-text    { text-align: right; }
+        [dir="rtl"] .cta-buttons  { justify-content: flex-start; }
+        [dir="rtl"] .hero-social  { justify-content: flex-start; }
+        [dir="rtl"] .hero-image   { order: 2; }
+
+        /* ─── Btn ripple ─────────────────────────────────────────── */
+        .btn-primary { position: relative; overflow: hidden; }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transform: translate(-50%,-50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .btn-primary:hover::before { width: 300px; height: 300px; }
+
+        /* ─── Social icons ───────────────────────────────────────── */
+        .social-icon { position: relative; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+        .social-icon::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 8px;
+            background: linear-gradient(45deg, transparent, rgba(64,178,239,0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .social-icon:hover::after { opacity: 1; }
+
+        /* ─── Timeline ───────────────────────────────────────────── */
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px;
+        }
+        [dir="ltr"] .timeline-item { padding-left: 40px; padding-right: 0; }
+        [dir="rtl"] .timeline-item { padding-left: 0; padding-right: 40px; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 0; width: 2px; height: 100%;
+            background: linear-gradient(to bottom, #40b2ef 0%, rgba(64,178,239,0.3) 50%, transparent 100%);
+        }
+        [dir="ltr"] .timeline-item::before { left: 0; }
+        [dir="rtl"] .timeline-item::before { right: 0; }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 14px; height: 14px;
+            background: #40b2ef;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(64,178,239,0.2);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        [dir="ltr"] .timeline-item::after { left: -6px; }
+        [dir="rtl"] .timeline-item::after { right: -6px; }
+        .timeline-item:last-child::before { display: none; }
+
+        /* ─── Modal ──────────────────────────────────────────────── */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,25,41,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 1.5rem;
+        }
+        .modal.active { display: flex; opacity: 1; }
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .modal.active .modal-content { transform: scale(1); }
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: -3.5rem; right: 0;
+            background: #40b2ef;
+            color: white;
+            width: 3rem; height: 3rem;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: bold;
+            cursor: pointer; border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(64,178,239,0.4);
+        }
+        .modal-close-btn:hover {
+            background: #2a8fc7;
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        /* ─── Cert card flex ─────────────────────────────────────── */
+        .cert-card-inner {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 1.75rem;
+        }
+        .cert-card-body { flex: 1; }
+        .cert-card-footer { margin-top: 1.25rem; flex-shrink: 0; }
+
+        /* ─── Mobile nav hamburger ───────────────────────────────── */
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            list-style: none;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 8px;
+            transition: background 0.2s;
+            z-index: 1001;
+            position: relative;
+        }
+        .hamburger:hover { background: rgba(64,178,239,0.1); }
+        .hamburger span {
+            display: block;
+            width: 22px; height: 2px;
+            background: #a8b2d1;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* Mobile menu overlay */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,25,41,0.8);
+            backdrop-filter: blur(4px);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ════════════════════════════════════════════════════════════
+           MOBILE OVERRIDES  (≤ 768px)
+        ════════════════════════════════════════════════════════════ */
+        @media (max-width: 768px) {
+
+            /* Nav */
+            .hamburger { display: flex; }
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 0; left: 0; right: 0;
+                background: rgba(10,25,41,0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                gap: 0;
+                padding: 5rem 1.5rem 2rem;
+                z-index: 999;
+                border-bottom: 1px solid rgba(64,178,239,0.2);
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+            }
+            .nav-menu.open { 
+                display: flex; 
+                transform: translateY(0);
+            }
+            .nav-menu li { width: 100%; }
+            .nav-menu li a {
+                display: block;
+                padding: 0.9rem 1rem;
+                border-radius: 10px;
+                font-size: 1.05rem;
+            }
+
+            /* Hero */
+            .hero-content {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+                justify-items: center;
+                padding-top: 1rem;
+            }
+            .hero-text { text-align: center !important; width: 100%; }
+            .cta-buttons { justify-content: center !important; flex-direction: column; align-items: center; gap: 0.75rem; }
+            .cta-buttons a { width: 100%; max-width: 280px; text-align: center; }
+            .hero-social { justify-content: center !important; }
+            .hero-image {
+                order: -1 !important;
+                width: 180px !important;
+                height: 180px !important;
+                margin: 0 auto !important;
+            }
+
+            /* Section headings */
+            .section-heading { font-size: 2rem !important; }
+            .section-subtitle { font-size: 0.95rem !important; }
+
+            /* Skills cards — full width single column */
+            .skills-grid {
+                grid-template-columns: 1fr !important;
+                gap: 0.875rem !important;
+            }
+            .skill-card { padding: 1.25rem !important; }
+            .skill-card .skill-icon { font-size: 2rem !important; margin-bottom: 0.75rem !important; }
+            .skill-card h3 { font-size: 1rem !important; margin-bottom: 0.5rem !important; }
+            .skill-card p { font-size: 0.875rem !important; }
+
+            /* Projects grid */
+            .projects-grid {
+                grid-template-columns: 1fr !important;
+                gap: 0.875rem !important;
+            }
+            .project-card .project-inner { padding: 1.25rem !important; }
+            .project-card h3 { font-size: 1.1rem !important; margin-bottom: 0.5rem !important; }
+            .project-card p { font-size: 0.875rem !important; margin-bottom: 0.75rem !important; }
+
+            /* Certifications grid */
+            .certs-grid {
+                grid-template-columns: 1fr !important;
+                gap: 0.875rem !important;
+            }
+            .cert-card-inner { padding: 1.25rem !important; }
+            .cert-card-inner h3 { font-size: 1.05rem !important; margin-bottom: 0.4rem !important; }
+            .cert-card-body p { font-size: 0.875rem !important; }
+
+            /* Timeline cards */
+            .timeline-item { margin-bottom: 20px; }
+            .timeline-card { padding: 1.25rem !important; }
+            .timeline-card h3 { font-size: 1.1rem !important; }
+
+            /* General section padding */
+            .section-wrap { padding-top: 3rem !important; padding-bottom: 3rem !important; padding-left: 1rem !important; padding-right: 1rem !important; }
+            .section-header { margin-bottom: 1.5rem !important; }
+        }
+
+        /* Small phones */
+        @media (max-width: 400px) {
+            .hero-image { width: 150px !important; height: 150px !important; }
+        }
+
+        /* Tablet (769–1024) — 2 col cards */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .skills-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .certs-grid  { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+    </style>
+</head>
+<body dir="rtl" class="font-cairo leading-relaxed text-text-primary bg-bg-dark overflow-x-hidden transition-all duration-300">
+
+    <!-- Background -->
+    <div class="fixed inset-0 -z-10" style="background: radial-gradient(circle at 30% 50%, rgba(64,178,239,0.1) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(100,255,218,0.08) 0%, transparent 50%);">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent animate-wave"></div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div>
+
+    <!-- ── Navigation ───────────────────────────────────────── -->
+    <nav id="navbar" class="fixed top-0 w-full px-6 md:px-12 py-4 bg-bg-dark/85 backdrop-blur-xl z-[1000] transition-all duration-300 border-b border-accent/15">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center">
+
+            <!-- Hamburger (mobile only) -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+
+            <!-- Nav links -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home"           class="text-text-secondary no-underline font-medium px-3 py-2 rounded-lg transition-all duration-300 hover:text-accent hover:bg-accent/10" data-ar="الرئيسية"  data-en="Home" onclick="closeMenu()">الرئيسية</a></li>
+                <li><a href="#about"          class="text-text-secondary no-underline font-medium px-3 py-2 rounded-lg transition-all duration-300 hover:text-accent hover:bg-accent/10" data-ar="نبذة عني"  data-en="About" onclick="closeMenu()">نبذة عني</a></li>
+                <li><a href="#education"      class="text-text-secondary no-underline font-medium px-3 py-2 rounded-lg transition-all duration-300 hover:text-accent hover:bg-accent/10" data-ar="التعليم"   data-en="Education" onclick="closeMenu()">التعليم</a></li>
+                <li><a href="#experience"     class="text-text-secondary no-underline font-medium px-3 py-2 rounded-lg transition-all duration-300 hover:text-accent hover:bg-accent/10" data-ar="الخبرات"   data-en="Experience" onclick="closeMenu()">الخبرات</a></li>
+                <li><a href="#skills"         class="text-text-secondary no-underline font-medium px-3 py-2 rounded-lg transition-all duration-300 hover:text-accent hover:bg-accent/10" data-ar="المهارات"  data-en="Skills" onclick="closeMenu()">المهارات</a></li>
+                <li><a href="#projects"       class="text-text-secondary no-underline font-medium px-3 py-2 rounded-lg transition-all duration-300 hover:text-accent hover:bg-accent/10" data-ar="المشاريع"  data-en="Projects" onclick="closeMenu()">المشاريع</a></li>
+                <li><a href="#certifications" class="text-text-secondary no-underline font-medium px-3 py-2 rounded-lg transition-all duration-300 hover:text-accent hover:bg-accent/10" data-ar="الشهادات"  data-en="Certifications" onclick="closeMenu()">الشهادات</a></li>
+            </ul>
+
+            <button class="lang-toggle bg-accent/15 border border-accent/30 text-text-primary px-4 py-1.5 rounded-full cursor-pointer font-semibold text-sm transition-all duration-300 hover:bg-accent/25 hover:border-accent hover:-translate-y-0.5" onclick="toggleLanguage()">
+                <span data-ar="English" data-en="العربية">English</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative px-4 md:px-8">
+        <div class="hero-content max-w-[1200px] w-full grid gap-12 md:gap-20 items-center animate-fadeInUp mt-16 md:mt-0">
+            <div class="hero-text">
+                <div class="text-base md:text-lg text-accent mb-3 font-semibold tracking-wide" data-ar="مرحباً، أنا" data-en="Hi, I am">مرحباً، أنا</div>
+<h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-2 md:mb-3 py-6 gradient-text leading-[1.5] md:leading-[1.7]" data-ar="محمد الصاعدي" data-en="Mohammed Alsaedi">
+    محمد الصاعدي
+</h1>
+                <p class="text-base md:text-xl mb-8 md:mb-12 text-text-secondary leading-[1.8]"
+                   data-ar="مطور متكامل ومصمم واجهات متخصص في بناء تجارب رقمية استثنائية تجمع بين الجمال والوظائف. أسعى لتحويل الأفكار إلى منتجات رقمية تترك أثراً."
+                   data-en="Full-Stack Developer and Designer specializing in building exceptional digital experiences that blend beauty with functionality. I transform ideas into digital products that make an impact.">مطور إبداعي ومصمم واجهات متخصص في بناء تجارب رقمية استثنائية تجمع بين الجمال والوظائف. أحول الأفكار إلى منتجات رقمية تترك أثراً.</p>
+                <div class="cta-buttons flex gap-4 md:gap-6 flex-wrap mb-8 md:mb-10">
+                    <a href="#projects" class="btn-primary inline-block px-7 md:px-10 py-3 md:py-4 bg-gradient-to-br from-primary to-primary-dark text-text-primary no-underline rounded-xl font-semibold transition-all duration-300 border-2 border-transparent hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(64,178,239,0.5)] hover:border-accent" data-ar="استعرض أعمالي" data-en="View My Work">استعرض أعمالي</a>
+                    <a href="#about"    class="btn-primary inline-block px-7 md:px-10 py-3 md:py-4 bg-transparent text-text-primary no-underline rounded-xl font-semibold transition-all duration-300 border-2 border-primary hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(64,178,239,0.5)] hover:bg-primary/10" data-ar="من أنا؟" data-en="Who Am I?">من أنا؟</a>
+                </div>
+                <div class="hero-social flex gap-3 items-center">
+                    <a href="https://github.com/MohAlsaedi" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon w-10 h-10 flex items-center justify-center text-text-secondary rounded-lg bg-primary/10 border border-primary/20 no-underline transition-all duration-300 hover:-translate-y-1 hover:text-accent hover:bg-primary/20 hover:border-accent hover:shadow-[0_4px_12px_rgba(64,178,239,0.3)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mohammed-alsaedi-3b8564258/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon w-10 h-10 flex items-center justify-center text-text-secondary rounded-lg bg-primary/10 border border-primary/20 no-underline transition-all duration-300 hover:-translate-y-1 hover:text-accent hover:bg-primary/20 hover:border-accent hover:shadow-[0_4px_12px_rgba(64,178,239,0.3)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="https://x.com/0xmohalsaedi" target="_blank" rel="noopener noreferrer" aria-label="Twitter/X" class="social-icon w-10 h-10 flex items-center justify-center text-text-secondary rounded-lg bg-primary/10 border border-primary/20 no-underline transition-all duration-300 hover:-translate-y-1 hover:text-accent hover:bg-primary/20 hover:border-accent hover:shadow-[0_4px_12px_rgba(64,178,239,0.3)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image w-72 h-72 md:w-80 md:h-80 rounded-2xl bg-gradient-to-br from-bg-medium to-bg-light flex items-center justify-center shadow-[0_15px_40px_rgba(10,25,41,0.7)] border-[3px] border-primary/20 relative overflow-hidden animate-glow">
+                <img src="assets/Personal_Image.jpeg" alt="Mohammed Alsaedi" class="w-full h-full object-cover object-[center_top]">
+                <div class="absolute inset-0 bg-gradient-to-br from-transparent to-primary/10 animate-float-gentle"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── About ─────────────────────────────────────────────── -->
+    <section id="about" class="section-wrap py-14 px-4 md:px-12 max-w-[1400px] mx-auto">
+        <div class="section-header text-center mb-10">
+            <div class="text-sm text-accent font-semibold tracking-wide mb-1" data-ar="تعرف علي" data-en="Get To Know">تعرف علي</div>
+            <h2 class="section-heading text-3xl md:text-5xl mb-3 text-text-primary" data-ar="نبذة عني" data-en="About Me">نبذة عني</h2>
+        </div>
+        <div class="max-w-[780px] mx-auto text-center">
+            <p class="text-base md:text-lg leading-[1.8] text-text-secondary"
+               data-ar="خرّيج بكالوريوس علوم حاسب مع مرتبة الشرف الثانية ,ومتدرب في أمانة العاصمة المقدسة في تطوير صفحات الويب, مهتم بتحويل الأفكار الإبداعية لحلول تقنية ذات أثر, بدأت رحلتي مع التعلم الذاتي في بداية سنة 2023 ولا زالت مستمرة -بفضل الله-, دائمًا ما أصب اهتمامي على التفاصيل, وموقن أن خير سبيل للتطور هو التطوع"
+               data-en="Bachelor degree holder in Computer Science with Second Class Honors and trained in web development at the Makkah Municipality. Committed to transforming innovative ideas into impactful technological solutions, with a strong dedication to continuous self-learning, attention to detail, and volunteer-driven growth.">خرّيج بكالوريوس علوم حاسب مع مرتبة الشرف الثانية ,ومتدرب في أمانة العاصمة المقدسة في تطوير صفحات الويب, مهتم بتحويل الأفكار الإبداعية لحلول تقنية ذات أثر, بدأت رحلتي مع التعلم الذاتي في بداية سنة 2023 ولا زالت مستمرة -بفضل الله-, دائمًا ما أصب اهتمامي على التفاصيل, وموقن أن خير سبيل للتطور هو التطوع</p>
+        </div>
+    </section>
+
+    <!-- ── Education ─────────────────────────────────────────── -->
+    <section id="education" class="section-wrap py-14 px-4 md:px-12 max-w-[1400px] mx-auto">
+        <div class="section-header text-center mb-10">
+            <div class="text-sm text-accent font-semibold tracking-wide mb-1" data-ar="رحلتي التعليمية" data-en="My Learning Journey">رحلتي التعليمية</div>
+            <h2 class="section-heading text-3xl md:text-5xl mb-3 text-text-primary" data-ar="التعليم والدراسة" data-en="Education">التعليم والدراسة</h2>
+            <p class="section-subtitle text-base text-text-secondary max-w-[680px] mx-auto" data-ar="المسار الأكاديمي الذي بنى أساس معرفتي التقنية" data-en="The academic path that built the foundation of my technical knowledge">المسار الأكاديمي الذي بنى أساس معرفتي التقنية</p>
+        </div>
+        <div class="max-w-[900px] mx-auto" id="educationTimeline"></div>
+    </section>
+
+    <!-- ── Experience ─────────────────────────────────────────── -->
+    <section id="experience" class="section-wrap py-14 px-4 md:px-12 max-w-[1400px] mx-auto">
+        <div class="section-header text-center mb-10">
+            <div class="text-sm text-accent font-semibold tracking-wide mb-1" data-ar="مسيرتي المهنية" data-en="My Professional Journey">مسيرتي المهنية</div>
+            <h2 class="section-heading text-3xl md:text-5xl mb-3 text-text-primary" data-ar="الخبرات العملية" data-en="Work Experience">الخبرات العملية</h2>
+            <p class="section-subtitle text-base text-text-secondary max-w-[680px] mx-auto" data-ar="رحلتي في بناء الحلول التقنية وتطوير المنتجات الرقمية" data-en="My journey in building technical solutions and developing digital products">رحلتي في بناء الحلول التقنية وتطوير المنتجات الرقمية</p>
+        </div>
+        <div class="max-w-[900px] mx-auto" id="experienceTimeline"></div>
+    </section>
+
+    <!-- ── Skills ─────────────────────────────────────────────── -->
+    <section id="skills" class="section-wrap py-14 px-4 md:px-12 max-w-[1400px] mx-auto">
+        <div class="section-header text-center mb-10">
+            <div class="text-sm text-accent font-semibold tracking-wide mb-1" data-ar="ماذا أتقن" data-en="What I Do">ماذا أتقن</div>
+            <h2 class="section-heading text-3xl md:text-5xl mb-3 text-text-primary" data-ar="المهارات والخبرات" data-en="Skills & Expertise">المهارات والخبرات</h2>
+        </div>
+        <div class="skills-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
+            <div class="skill-card enhanced-card bg-gradient-to-br from-bg-medium to-bg-light p-7 rounded-2xl border border-primary/20 transition-all duration-300 text-center shadow-[0_4px_15px_rgba(10,25,41,0.3)] hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(64,178,239,0.4)] hover:border-accent">
+                <div class="skill-icon text-[2.75rem] mb-4 [filter:drop-shadow(0_4px_8px_rgba(64,178,239,0.3))]">🎨</div>
+                <h3 class="mb-3 text-text-primary text-lg font-semibold" data-ar="تصميم واجهات المستخدم" data-en="UI/UX Design">تصميم واجهات المستخدم</h3>
+                <p class="text-text-secondary leading-[1.7] text-sm" data-ar="إنشاء واجهات مستخدم بديهية وجذابة بصرياً مع التركيز على تجربة المستخدم وإمكانية الوصول." data-en="Creating intuitive and visually appealing user interfaces with a focus on user experience and accessibility.">إنشاء واجهات مستخدم بديهية وجذابة بصرياً مع التركيز على تجربة المستخدم وإمكانية الوصول.</p>
+            </div>
+            <div class="skill-card enhanced-card bg-gradient-to-br from-bg-medium to-bg-light p-7 rounded-2xl border border-primary/20 transition-all duration-300 text-center shadow-[0_4px_15px_rgba(10,25,41,0.3)] hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(64,178,239,0.4)] hover:border-accent">
+                <div class="skill-icon text-[2.75rem] mb-4 [filter:drop-shadow(0_4px_8px_rgba(64,178,239,0.3))]">⚡</div>
+                <h3 class="mb-3 text-text-primary text-lg font-semibold" data-ar="تطوير الواجهات الأمامية" data-en="Frontend Development">تطوير الواجهات الأمامية</h3>
+                <p class="text-text-secondary leading-[1.7] text-sm" data-ar="بناء تطبيقات ويب متجاوبة وعالية الأداء باستخدام تقنيات حديثة مثل React و Bootstrap و Tailwind" data-en="Building responsive, performant web applications using modern technologies like React, Bootstrap, and Tailwind.">بناء تطبيقات ويب متجاوبة وعالية الأداء باستخدام تقنيات حديثة مثل React و Vue وJavaScript.</p>
+            </div>
+            <div class="skill-card enhanced-card bg-gradient-to-br from-bg-medium to-bg-light p-7 rounded-2xl border border-primary/20 transition-all duration-300 text-center shadow-[0_4px_15px_rgba(10,25,41,0.3)] hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(64,178,239,0.4)] hover:border-accent">
+                <div class="skill-icon text-[2.75rem] mb-4 [filter:drop-shadow(0_4px_8px_rgba(64,178,239,0.3))]">🚀</div>
+                <h3 class="mb-3 text-text-primary text-lg font-semibold" data-ar="تطوير الأنظمة الخلفية" data-en="Backend Development">تطوير الخوادم</h3>
+                <p class="text-text-secondary leading-[1.7] text-sm" data-ar="تطوير تطبيقات خادم قوية وواجهات برمجية باستخدام PHP(Laravel) و Python(FastAPI)" data-en="Developing robust server-side applications and APIs using PHP(Laravel), Python(FastAPI)">تطوير تطبيقات خادم قوية وواجهات برمجية باستخدام PHP(Laravel) و Python(FastAPI)</p>
+            </div>
+            <div class="skill-card enhanced-card bg-gradient-to-br from-bg-medium to-bg-light p-7 rounded-2xl border border-primary/20 transition-all duration-300 text-center shadow-[0_4px_15px_rgba(10,25,41,0.3)] hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(64,178,239,0.4)] hover:border-accent">
+                <div class="skill-icon text-[2.75rem] mb-4 [filter:drop-shadow(0_4px_8px_rgba(64,178,239,0.3))]">📱</div>
+                <h3 class="mb-3 text-text-primary text-lg font-semibold" data-ar="تطوير تطبيقات الجوال" data-en="Mobile Development">تطوير تطبيقات الجوال</h3>
+                <p class="text-text-secondary leading-[1.7] text-sm" data-ar="إنشاء تطبيقات موبايل متعددة المنصات باستخدام React Native" data-en="Creating cross-platform mobile applications with React Native">إنشاء تطبيقات موبايل متعددة المنصات باستخدام React Native و Flutter لنظامي iOS و Android.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Projects ───────────────────────────────────────────── -->
+    <section id="projects" class="section-wrap py-14 px-4 md:px-12 max-w-[1400px] mx-auto">
+        <div class="section-header text-center mb-10">
+            <div class="text-sm text-accent font-semibold tracking-wide mb-1" data-ar="أعمالي" data-en="My Work">أعمالي</div>
+            <h2 class="section-heading text-3xl md:text-5xl mb-3 text-text-primary" data-ar="المشاريع المميزة" data-en="Featured Projects">المشاريع المميزة</h2>
+            <p class="section-subtitle text-base text-text-secondary max-w-[680px] mx-auto" data-ar="مجموعة مختارة من مشاريعي التي تعكس شغفي بالتطوير والتصميم" data-en="A curated selection of projects that showcase my passion for development and design">مجموعة مختارة من مشاريعي التي تعكس شغفي بالتطوير والتصميم</p>
+        </div>
+        <div class="projects-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-8" id="projectsGrid"></div>
+    </section>
+
+    <!-- ── Certifications ─────────────────────────────────────── -->
+    <section id="certifications" class="section-wrap py-14 px-4 md:px-12 max-w-[1400px] mx-auto">
+        <div class="section-header text-center mb-10">
+            <div class="text-sm text-accent font-semibold tracking-wide mb-1" data-ar="الإنجازات" data-en="Achievements">الإنجازات</div>
+            <h2 class="section-heading text-3xl md:text-5xl mb-3 text-text-primary" data-ar="الشهادات والدورات" data-en="Certifications">الشهادات والاعتمادات</h2>
+            <p class="section-subtitle text-base text-text-secondary max-w-[680px] mx-auto" data-ar="شهادات تعكس التزامي بالتطوير المستمر والتميز" data-en="Professional certifications reflecting my commitment to continuous development and excellence">شهادات احترافية تعكس التزامي بالتطوير المستمر والتميز</p>
+        </div>
+        <div class="certs-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-8 items-stretch" id="certificationsGrid"></div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="modal-close-btn">×</button>
+            <img id="modalImage" src="" alt="Certificate" class="modal-image">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-bg-medium py-10 px-4 text-center mt-8 border-t border-primary/20">
+        <div class="max-w-[1400px] mx-auto">
+            <!-- Social Icons -->
+            <div class="flex items-center justify-center gap-4 mb-6">
+                <a href="https://github.com/MohAlsaedi" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon w-12 h-12 flex items-center justify-center text-text-secondary rounded-lg bg-primary/10 border border-primary/20 no-underline transition-all duration-300 hover:-translate-y-1 hover:text-accent hover:bg-primary/20 hover:border-accent hover:shadow-[0_4px_12px_rgba(64,178,239,0.3)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/mohammed-alsaedi-3b8564258/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon w-12 h-12 flex items-center justify-center text-text-secondary rounded-lg bg-primary/10 border border-primary/20 no-underline transition-all duration-300 hover:-translate-y-1 hover:text-accent hover:bg-primary/20 hover:border-accent hover:shadow-[0_4px_12px_rgba(64,178,239,0.3)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://x.com/0xmohalsaedi" target="_blank" rel="noopener noreferrer" aria-label="Twitter/X" class="social-icon w-12 h-12 flex items-center justify-center text-text-secondary rounded-lg bg-primary/10 border border-primary/20 no-underline transition-all duration-300 hover:-translate-y-1 hover:text-accent hover:bg-primary/20 hover:border-accent hover:shadow-[0_4px_12px_rgba(64,178,239,0.3)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+            
+            <!-- Copyright -->
+            <p class="text-text-secondary text-sm" data-ar="© 2025 محمد الصاعدي. جميع الحقوق محفوظة." data-en="© 2025 Mohammed Alsaedi. All rights reserved.">&copy; 2025 محمد الصاعدي. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentLang = 'ar';
+
+        const education = [
+            {
+                degreeAr: 'بكالوريوس علوم الحاسب',
+                degreeEn: 'Bachelor of Computer Science',
+                institutionAr: 'جامعة أم القرى',
+                institutionEn: 'Umm Al-Qura University',
+                periodAr: '2021 - 2025',
+                periodEn: '2021 - 2025',
+                gradeAr: 'بمعدل 3.42 من 4 بمرتبة الشرف الثانية',
+                gradeEn: 'GPA 3.42/4 — Second Class Honors',
+                descriptionAr: 'تخصصت في تطوير البرمجيات وهندستها مع التركيز على تطوير الويب والتطبيقات. اكتسبت معرفة عميقة في البرمجة الكائنية، قواعد البيانات، الخوارزميات، وتصميم الأنظمة.',
+                descriptionEn: 'Specialized in software development and systems engineering with focus on web and application development. Gained deep knowledge in object-oriented programming, databases, algorithms, and system design.'
+            }
+        ];
+
+        const experience = [
+            {
+                titleAr: 'مطور برامج (متدرب)',
+                titleEn: 'Software Development Intern',
+                companyAr: 'أمانة العاصمة المقدسة',
+                companyEn: 'Holy Makkah Municipality',
+                periodAr: 'يونيو 2024 – أغسطس 2024',
+                periodEn: 'June 2024 – August 2024',
+                descriptionAr: 'المشاركة في تطوير موقع ويب، بالاعتماد على Laravel وBootstrap في البناء، وتصميم واجهات المستخدم باستخدام Figma ضمن بيئة عمل تعاونية.',
+                descriptionEn: 'Contributed to developing a web application, utilizing Laravel and Bootstrap for implementation, and Figma for UI design in a collaborative environment.',
+                highlightsAr: [
+                    'تطبيق منهجية هندسة البرمجيات (SDLC) مما قلل إعادة العمل بنسبة 40%',
+                    'تصميم واجهات المستخدم باستخدام Figma',
+                    'بناء وتطوير موقع ويب باستخدام Laravel وBootstrap',
+                    'العمل ضمن فريق مكوّن من 5 أعضاء'
+                ],
+                highlightsEn: [
+                    'Applied SDLC software engineering practices, reducing rework by 40%',
+                    'Built and developed a web application using Laravel and Bootstrap',
+                    'Designed user interfaces using Figma',
+                    'Collaborated within a team of 5 members'
+                ]
+            }
+        ];
+
+        const projects = [
+            {
+                titleAr: 'متجر رياضي',
+                titleEn: 'Sports Store',
+                descAr: 'صفحة انترنت تحاكي متجرًا إلكترونيًا لبيع المنتجات الرياضية، توفّر تجربة التصفح والشراء وعرض المنتجات، وسلة تسوق لكل مستخدم.',
+                descEn: 'A web page that simulates an online store for selling sports products, providing a browsing and purchasing experience, product display, and a shopping cart for each user.',
+                tags: ['Tailwind', 'Laravel', 'MySQL'],
+                link: 'https://github.com/mohalsaedi/Sports-Store'
+
+            },
+            {
+                titleAr: 'تطبيق اكتشاف الاحتيال',
+                titleEn: 'Fraud Detection App',
+                descAr: 'تطبيق يهدف إلى تحليل المحتوى المرسل من المستخدمين لاكتشاف محاولات الاحتيال المحتملة، مع تقديم تصنيف ونتائج تساعد على التوعية واتخاذ القرار.',
+                descEn: 'An application designed to analyze user-submitted content to detect potential fraud attempts, providing classification and results that help raise awareness and support decision-making.',
+                tags: ['React Native', 'FastAPI', 'PostgreSQL']
+            },
+            {
+                titleAr: 'صفحة ويب لمكتبة',
+                titleEn: 'Bookstore Website',
+                descAr: 'تطبيق ويب لمكتبة بسيطة تهدف إلى عرض وظائف المكتبة الأساسية مثل عرض الكتب وإدارتها، ويُستخدم لأغراض العرض والتجربة.',
+                descEn: 'A simple web application designed to showcase basic bookstore functionalities such as viewing and managing books, intended for demonstration and practice purposes.',
+                tags: ['HTML', 'CSS', 'Javascript', 'PHP', 'MySQL'],
+                link: "https://github.com/mohalsaedi/Bookstore"
+            },
+            {
+                titleAr: 'أداة سطر أوامر لعرض نشاط GitHub',
+                titleEn: 'GitHub Activity CLI',
+                descAr: 'أداة سطر أوامر خفيفة مبنية بلغة PHP تجلب وتعرض آخر الأنشطة العامة لأي مستخدم على GitHub عبر واجهة GitHub API، مع التحقق من صحة المدخلات ومعالجة قوية للأخطاء مثل المستخدم غير الموجود وتجاوز حد الطلبات وأخطاء الشبكة.',
+                descEn: 'A lightweight PHP command-line tool that fetches and displays a GitHub user\'s recent public activity via the GitHub Events API, with strong input validation and robust error handling for invalid usernames, rate limits, and network failures.',
+                tags: ['PHP', 'CLI', 'GitHub API'],
+                link: 'https://github.com/mohalsaedi/Github-Activity-CLI'
+            },
+            {
+                titleAr: 'نظام كشف الرسائل المزعجة',
+                titleEn: 'SMS Spam Detector',
+                descAr: 'نظام تعلم آلي متكامل لتصنيف رسائل SMS كمزعجة أو غير مزعجة، مبني على خوارزمية Perceptron مطورة من الصفر مع معالجة النصوص باستخدام TF-IDF، وتقييم الأداء عبر مقاييس الدقة والاستدعاء وF1، وواجهة تفاعلية بـ Gradio لعرض النتائج مع درجة الثقة في الوقت الفعلي.',
+                descEn: 'An end-to-end machine learning system for classifying SMS messages as spam or ham, built on a custom Perceptron algorithm implemented from scratch with TF-IDF text vectorization, evaluated using accuracy, precision, recall and F1-score, and served through an interactive Gradio interface with real-time confidence scores.',
+                tags: ['Python', 'Scikit-learn', 'Gradio', 'NLP'],
+                link: 'https://github.com/mohalsaedi/Spam-Hamp_Detector'
+            },
+            {
+                titleAr: 'تطبيق إدارة الإشارات المرجعية',
+                titleEn: 'Bookmark Manager',
+                descAr: 'تطبيق ويب لإدارة الإشارات المرجعية مبني على Node.js وExpress بمعمارية MVC، يدعم تسجيل الدخول وإنشاء الحسابات مع تشفير كلمات المرور عبر bcrypt، وإدارة الجلسات بواسطة express-session وconnect-mongo، والتحقق من صحة البيانات باستخدام Joi، مع قاعدة بيانات MongoDB عبر Mongoose وعرض الصفحات بـ EJS.',
+                descEn: 'A full-stack bookmark management web app built with Node.js and Express in an MVC structure, featuring user authentication with bcrypt password hashing, session management via express-session and connect-mongo, Joi-based input validation, MongoDB/Mongoose for data storage, and EJS for server-rendered views.',
+                tags: ['Node.js', 'Express', 'MongoDB', 'EJS'],
+                link: 'https://github.com/mohalsaedi/Bookmark'
+            }
+        ];
+
+        const certifications = [
+            {
+                titleAr: 'شهادة مبادئ الأمن السيبراني',
+                titleEn: 'Cybersecurity Fundamentals',
+                issuerAr: 'IBM',
+                issuerEn: 'IBM',
+                dateAr: 'يناير 2026',
+                dateEn: 'January 2026',
+                descAr: 'تركز على المفاهيم الأساسية للأمن السيبراني، بما في ذلك أنواع التهديدات، مبادئ حماية الأنظمة، أساسيات الشبكات، وأفضل الممارسات الأمنية.',
+                descEn: 'Certificate covers core cybersecurity concepts, including common threats, system protection principles, networking basics, and security best practices.',
+                certificateImage: 'assets/Certifications/IBMDesign20260111-33-18q8vy_page-0001.jpg'
+            },
+            {
+                titleAr: 'أساسيات نظام لينكس',
+                titleEn: 'Linux System Fundamentals',
+                issuerAr: 'فلكس كورسز',
+                issuerEn: 'Flex Courses',
+                dateAr: 'يوليو 2025',
+                dateEn: 'July 2025',
+                descAr: 'شهادة في أساسيات نظام لينكس تهدف إلى بناء فهم عملي لكيفية استخدام وإدارة نظام التشغيل لينكس، مع التركيز على سطر الأوامر، إدارة الملفات، الصلاحيات.',
+                descEn: 'A certificate in Linux fundamentals aimed at building a practical understanding of how to use and manage the Linux operating system, with a focus on the command line, file management, and permissions.',
+                certificateImage: 'assets/Certifications/Linux Course - FlexCourses.com_page-0001.jpg'
+            },
+            {
+                titleAr: 'بكالوريوس علوم حاسب',
+                titleEn: 'Bachelor Degree in Computer Science',
+                issuerAr: 'جامعة أم القرى',
+                issuerEn: 'Umm Al-Qura University',
+                dateAr: 'يونيو 2025',
+                dateEn: 'June 2025',
+                descAr: 'درجة جامعية تركز على أساسيات علوم الحاسب، تشمل البرمجة، الخوارزميات، هياكل البيانات، قواعد البيانات، الشبكات، وأنظمة التشغيل.',
+                descEn: 'An academic degree focused on the fundamentals of computer science, including programming, algorithms, data structures, databases, networking, and operating systems.',
+                certificateImage: 'assets/Certifications/Graduation Certificate.jpg'
+            },
+            {
+                titleAr: 'شهادة إتمام تدريب',
+                titleEn: 'Internship Certification',
+                issuerAr: 'أمانة العاصمة المقدسة',
+                issuerEn: 'Holy Makkah Municipality',
+                dateAr: 'أغسطس 2024',
+                dateEn: 'August 2024',
+                descAr: 'شهادة تُثبت إتمام فترة تدريب في تطوير البرمجيات، شملت العمل على مشاريع ويب حقيقية باستخدام Laravel وBootstrap وFigma.',
+                descEn: 'Certificate confirming the completion of a software development internship, including work on real web projects using Laravel, Bootstrap, and Figma.',
+                certificateImage: 'assets/Certifications/internship.jpg'
+            }
+        ];
+
+        /* ─── Render Education ─── */
+        function renderEducation() {
+            const timeline = document.getElementById('educationTimeline');
+            timeline.innerHTML = '';
+            education.forEach(edu => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+                item.innerHTML = `
+                    <div class="timeline-card enhanced-card bg-gradient-to-br from-bg-medium to-bg-light p-6 md:p-8 rounded-2xl border border-primary/20 transition-all duration-300 hover:border-accent hover:shadow-[0_8px_25px_rgba(64,178,239,0.4)]">
+                        <div class="flex flex-wrap items-start md:items-center justify-between gap-3 mb-3">
+                            <h3 class="text-lg md:text-2xl font-bold text-text-primary">${currentLang==='ar'?edu.degreeAr:edu.degreeEn}</h3>
+                            <span class="inline-block bg-accent/15 px-3 py-1.5 rounded-full text-xs md:text-sm border border-accent/30 text-accent font-medium whitespace-nowrap">${currentLang==='ar'?edu.periodAr:edu.periodEn}</span>
+                        </div>
+                        <div class="text-primary font-semibold text-base mb-1">${currentLang==='ar'?edu.institutionAr:edu.institutionEn}</div>
+                        <div class="text-accent text-xs md:text-sm mb-3">${currentLang==='ar'?edu.gradeAr:edu.gradeEn}</div>
+                        <p class="text-text-secondary leading-[1.7] text-sm md:text-base">${currentLang==='ar'?edu.descriptionAr:edu.descriptionEn}</p>
+                    </div>`;
+                timeline.appendChild(item);
+            });
+        }
+
+        /* ─── Render Experience ─── */
+        function renderExperience() {
+            const timeline = document.getElementById('experienceTimeline');
+            timeline.innerHTML = '';
+            experience.forEach(exp => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+                const highlights = currentLang==='ar'?exp.highlightsAr:exp.highlightsEn;
+                item.innerHTML = `
+                    <div class="timeline-card enhanced-card bg-gradient-to-br from-bg-medium to-bg-light p-6 md:p-8 rounded-2xl border border-primary/20 transition-all duration-300 hover:border-accent hover:shadow-[0_8px_25px_rgba(64,178,239,0.4)]">
+                        <div class="flex flex-wrap items-start md:items-center justify-between gap-3 mb-3">
+                            <h3 class="text-lg md:text-2xl font-bold text-text-primary">${currentLang==='ar'?exp.titleAr:exp.titleEn}</h3>
+                            <span class="inline-block bg-primary/15 px-3 py-1.5 rounded-full text-xs md:text-sm border border-primary/30 text-primary font-medium whitespace-nowrap">${currentLang==='ar'?exp.periodAr:exp.periodEn}</span>
+                        </div>
+                        <div class="text-accent font-semibold text-base mb-3">${currentLang==='ar'?exp.companyAr:exp.companyEn}</div>
+                        <p class="text-text-secondary leading-[1.7] text-sm md:text-base mb-3">${currentLang==='ar'?exp.descriptionAr:exp.descriptionEn}</p>
+                        <ul class="list-disc ${currentLang==='ar'?'pr-5':'pl-5'} space-y-1.5">
+                            ${highlights.map(h=>`<li class="text-text-secondary text-sm">${h}</li>`).join('')}
+                        </ul>
+                    </div>`;
+                timeline.appendChild(item);
+            });
+        }
+
+        /* ─── Render Projects ─── */
+        function renderProjects() {
+            const grid = document.getElementById('projectsGrid');
+            grid.innerHTML = '';
+            projects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-card enhanced-card bg-gradient-to-br from-bg-medium to-bg-light rounded-2xl overflow-hidden border border-primary/20 transition-all duration-300 cursor-pointer shadow-[0_4px_15px_rgba(10,25,41,0.3)] hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(64,178,239,0.4)] hover:border-accent';
+                card.innerHTML = `
+                    <div class="project-inner p-5 md:p-7">
+                        <h3 class="mb-3 text-text-primary text-lg md:text-xl font-semibold">${currentLang==='ar'?project.titleAr:project.titleEn}</h3>
+                        <p class="text-text-secondary mb-4 leading-[1.7] text-sm md:text-base">${currentLang==='ar'?project.descAr:project.descEn}</p>
+                        <div class="flex flex-wrap gap-2">
+                            ${project.tags.map(tag=>`<span class="bg-primary/15 px-3 py-1 rounded-full text-xs md:text-sm border border-primary/30 text-primary font-medium">${tag}</span>`).join('')}
+                        </div>
+                        ${project.link ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="inline-flex items-center gap-1.5 mt-4 text-accent text-sm font-semibold hover:underline">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            <span>${currentLang==='ar'?'عرض على GitHub':'View on GitHub'}</span>
+                        </a>` : ''}
+                    </div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        /* ─── Render Certifications ─── */
+        function renderCertifications() {
+            const grid = document.getElementById('certificationsGrid');
+            grid.innerHTML = '';
+            certifications.forEach(cert => {
+                const card = document.createElement('div');
+                card.className = 'enhanced-card bg-gradient-to-br from-bg-medium to-bg-light rounded-2xl border border-primary/20 transition-all duration-300 shadow-[0_4px_15px_rgba(10,25,41,0.3)] hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(64,178,239,0.4)] hover:border-accent h-full';
+                card.innerHTML = `
+                    <div class="cert-card-inner">
+                        <div class="cert-card-body">
+                            <h3 class="mb-2 text-text-primary text-lg md:text-xl font-semibold">${currentLang==='ar'?cert.titleAr:cert.titleEn}</h3>
+                            <div class="text-primary font-semibold text-sm mb-1">${currentLang==='ar'?cert.issuerAr:cert.issuerEn}</div>
+                            <div class="text-text-secondary text-xs mb-3">${currentLang==='ar'?cert.dateAr:cert.dateEn}</div>
+                            <p class="text-text-secondary leading-[1.7] text-sm">${currentLang==='ar'?cert.descAr:cert.descEn}</p>
+                        </div>
+                        <div class="cert-card-footer">
+                            <button onclick="openCertificate('${cert.certificateImage}')" class="w-full px-5 py-2.5 text-center rounded-lg font-semibold transition-all duration-300 text-sm bg-transparent border-2 border-primary text-primary hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(64,178,239,0.3)] hover:bg-primary/10">
+                                ${currentLang==='ar'?'عرض الشهادة':'View Certificate'}
+                            </button>
+                        </div>
+                    </div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        /* ─── Language toggle ─── */
+        function toggleLanguage() {
+            currentLang = currentLang==='ar'?'en':'ar';
+            const html = document.documentElement;
+            const body = document.body;
+            if (currentLang==='en') {
+                html.setAttribute('lang','en');
+                body.setAttribute('dir','ltr');
+            } else {
+                html.setAttribute('lang','ar');
+                body.setAttribute('dir','rtl');
+            }
+            updateContent();
+            updateAlignment();
+            renderEducation();
+            renderExperience();
+            renderProjects();
+            renderCertifications();
+        }
+
+        function updateAlignment() {
+            const heroText = document.querySelector('.hero-text');
+            const ctaButtons = document.querySelector('.cta-buttons');
+            const heroSocial = document.querySelector('.hero-social');
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+                heroText.style.textAlign = 'center';
+                ctaButtons.style.justifyContent = 'center';
+                heroSocial.style.justifyContent = 'center';
+            } else if (currentLang==='en') {
+                heroText.style.textAlign = 'left';
+                ctaButtons.style.justifyContent = 'flex-start';
+                heroSocial.style.justifyContent = 'flex-start';
+            } else {
+                heroText.style.textAlign = 'right';
+                ctaButtons.style.justifyContent = 'flex-start';
+                heroSocial.style.justifyContent = 'flex-start';
+            }
+        }
+
+        function updateContent() {
+            document.querySelectorAll('[data-ar]').forEach(el => {
+                const text = currentLang==='ar'?el.getAttribute('data-ar'):el.getAttribute('data-en');
+                if (el.tagName==='INPUT'||el.tagName==='TEXTAREA') {
+                    el.placeholder = currentLang==='ar'?el.getAttribute('data-placeholder-ar'):el.getAttribute('data-placeholder-en');
+                } else { el.textContent = text; }
+            });
+        }
+
+        /* ─── Hamburger menu ─── */
+        function toggleMenu() {
+            const btn = document.getElementById('hamburgerBtn');
+            const menu = document.getElementById('navMenu');
+            const overlay = document.getElementById('menuOverlay');
+            
+            btn.classList.toggle('open');
+            menu.classList.toggle('open');
+            overlay.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (menu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function closeMenu() {
+            const btn = document.getElementById('hamburgerBtn');
+            const menu = document.getElementById('navMenu');
+            const overlay = document.getElementById('menuOverlay');
+            
+            btn.classList.remove('open');
+            menu.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        /* ─── Modal ─── */
+        function openCertificate(imagePath) {
+            const modal = document.getElementById('certificateModal');
+            document.getElementById('modalImage').src = imagePath;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(event) {
+            if (!event || event.target.id==='certificateModal') {
+                document.getElementById('certificateModal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+        document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
+
+        /* ─── Smooth scroll ─── */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navH = document.getElementById('navbar').offsetHeight;
+                    window.scrollTo({ top: target.offsetTop - navH, behavior: 'smooth' });
+                }
+            });
+        });
+
+        /* ─── Navbar scroll effect ─── */
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.pageYOffset > 80) {
+                navbar.classList.add('bg-bg-dark/95','py-3');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('bg-bg-dark/95','py-3');
+                navbar.classList.add('py-4');
+            }
+        });
+
+        /* ─── Active nav link ─── */
+        window.addEventListener('scroll', () => {
+            const scrollY = window.pageYOffset;
+            document.querySelectorAll('section[id]').forEach(section => {
+                const top = section.offsetTop - 160;
+                const id = section.getAttribute('id');
+                const link = document.querySelector(`nav a[href="#${id}"]`);
+                if (scrollY > top && scrollY <= top + section.offsetHeight) {
+                    link?.classList.add('text-accent');
+                } else {
+                    link?.classList.remove('text-accent');
+                }
+            });
+        });
+
+        /* ─── Intersection observer ─── */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.enhanced-card').forEach(card => observer.observe(card));
+
+        /* ─── Init ─── */
+        document.addEventListener('DOMContentLoaded', () => {
+            updateContent();
+            updateAlignment();
+            renderEducation();
+            renderExperience();
+            renderProjects();
+            renderCertifications();
+        });
+
+        window.addEventListener('resize', updateAlignment);
+    </script>
+</body>
+</html>
